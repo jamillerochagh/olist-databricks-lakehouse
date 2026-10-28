@@ -1,0 +1,16 @@
+__pycache__/
+.venv/
+.local-tests/
+data/raw/*.csv
+*.zip
+.env
+.env.*
+!.env.example
+.DS_Store
+.ipynb_checkpoints/
+.pytest_cache/
+*.pyc
+# Local migration history; current validation reports are versioned below.
+docs/dashboard_binding_fix.json
+docs/dashboard_percentage_fix.json
+docs/validation_dashboard_english.json
