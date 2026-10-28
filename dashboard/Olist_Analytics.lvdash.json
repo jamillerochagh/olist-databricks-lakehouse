@@ -1,0 +1,552 @@
+{
+  "datasets": [
+    {
+      "displayName": "Delivered orders · Gold",
+      "name": "a6fc227b0ed2",
+      "queryLines": [
+        "SELECT order_id, purchase_date, purchase_month, customer_state,\n",
+        "       items_value, freight_value, delivery_days,\n",
+        "       CASE WHEN on_time_delivery IS NOT NULL THEN 1 ELSE 0 END AS sla_evaluable,\n",
+        "       CASE WHEN on_time_delivery THEN 1 ELSE 0 END AS on_time,\n",
+        "       CASE WHEN NOT on_time_delivery THEN 1 ELSE 0 END AS late,\n",
+        "       CAST(CASE WHEN on_time_delivery THEN 100\n",
+        "                 WHEN NOT on_time_delivery THEN 0\n",
+        "                 ELSE NULL END AS DOUBLE) AS on_time_percent_per_order\n",
+        "FROM `workspace`.`olist_gold`.`fact_orders`\n",
+        "WHERE is_sales_eligible\n"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "displayName": "Sales & Delivery",
+      "layout": [
+        {
+          "position": {
+            "height": 2,
+            "width": 6,
+            "x": 0,
+            "y": 0
+          },
+          "widget": {
+            "name": "54d53c382845",
+            "textbox_spec": "# Olist · Sales & Delivery\n**Jamille Ghazaleh** · Brazilian e-commerce\n\nExplore delivered orders by purchase date and customer state. Item values in Brazilian reais (BRL), excluding freight."
+          }
+        },
+        {
+          "position": {
+            "height": 2,
+            "width": 3,
+            "x": 0,
+            "y": 2
+          },
+          "widget": {
+            "name": "14db90a55435",
+            "queries": [
+              {
+                "name": "filter_values",
+                "query": {
+                  "datasetName": "a6fc227b0ed2",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "`purchase_date`",
+                      "name": "purchase_date"
+                    },
+                    {
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)",
+                      "name": "purchase_date_associativity"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "displayName": "Purchase date",
+                    "fieldName": "purchase_date",
+                    "queryName": "filter_values"
+                  }
+                ]
+              },
+              "frame": {
+                "showDescription": false,
+                "showTitle": true,
+                "title": "Purchase date"
+              }
+            }
+          }
+        },
+        {
+          "position": {
+            "height": 2,
+            "width": 3,
+            "x": 3,
+            "y": 2
+          },
+          "widget": {
+            "name": "3d142bf7684c",
+            "queries": [
+              {
+                "name": "filter_values",
+                "query": {
+                  "datasetName": "a6fc227b0ed2",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "`customer_state`",
+                      "name": "customer_state"
+                    },
+                    {
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)",
+                      "name": "customer_state_associativity"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "displayName": "Customer state (Brazil)",
+                    "fieldName": "customer_state",
+                    "queryName": "filter_values"
+                  }
+                ]
+              },
+              "frame": {
+                "showDescription": false,
+                "showTitle": true,
+                "title": "Customer state (Brazil)"
+              }
+            }
+          }
+        },
+        {
+          "position": {
+            "height": 3,
+            "width": 2,
+            "x": 0,
+            "y": 4
+          },
+          "widget": {
+            "name": "3b50436bf153",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a6fc227b0ed2",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "COUNT(`order_id`)",
+                      "name": "metric"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "displayName": "Delivered orders",
+                  "fieldName": "metric"
+                }
+              },
+              "format": {
+                "numberFormat": {
+                  "formatType": "numeral",
+                  "format": "0,0"
+                }
+              },
+              "frame": {
+                "description": "Orders with valid items.",
+                "showDescription": true,
+                "showTitle": true,
+                "title": "Delivered orders"
+              }
+            }
+          }
+        },
+        {
+          "position": {
+            "height": 3,
+            "width": 2,
+            "x": 2,
+            "y": 4
+          },
+          "widget": {
+            "name": "41d9047c1bb9",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a6fc227b0ed2",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "SUM(`items_value`)",
+                      "name": "metric"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "displayName": "Item value (BRL)",
+                  "fieldName": "metric"
+                }
+              },
+              "format": {
+                "numberFormat": {
+                  "formatType": "numeral",
+                  "format": "0,0.00"
+                }
+              },
+              "frame": {
+                "description": "Item value, excluding freight.",
+                "showDescription": true,
+                "showTitle": true,
+                "title": "Item value (BRL)"
+              }
+            }
+          }
+        },
+        {
+          "position": {
+            "height": 3,
+            "width": 2,
+            "x": 4,
+            "y": 4
+          },
+          "widget": {
+            "name": "ee042bf8fc13",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a6fc227b0ed2",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "AVG(`on_time_percent_per_order`)",
+                      "name": "metric"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "displayName": "On-time delivery (%)",
+                  "fieldName": "metric"
+                }
+              },
+              "format": {
+                "numberFormat": {
+                  "formatType": "numeral",
+                  "format": "0.00"
+                }
+              },
+              "frame": {
+                "description": "Orders with a valid deadline.",
+                "showDescription": true,
+                "showTitle": true,
+                "title": "On-time delivery (%)"
+              }
+            }
+          }
+        },
+        {
+          "position": {
+            "height": 8,
+            "width": 4,
+            "x": 0,
+            "y": 7
+          },
+          "widget": {
+            "name": "a6085790b030",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a6fc227b0ed2",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "`purchase_month`",
+                      "name": "month"
+                    },
+                    {
+                      "expression": "SUM(`items_value`)",
+                      "name": "total_items"
+                    }
+                  ],
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "`month`"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "axis": {
+                    "title": "Purchase month"
+                  },
+                  "displayName": "Month",
+                  "fieldName": "month",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "axis": {
+                    "title": "Item value (BRL)"
+                  },
+                  "displayName": "Item value (BRL)",
+                  "fieldName": "total_items",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "format": {
+                "numberFormat": {
+                  "formatType": "numeral",
+                  "format": "0,0"
+                },
+                "timeFormat": {
+                  "formatType": "moment",
+                  "format": "MMM YYYY"
+                }
+              },
+              "frame": {
+                "showDescription": false,
+                "showTitle": true,
+                "title": "Monthly item value"
+              },
+              "mark": {
+                "colors": [
+                  "#2563EB"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "position": {
+            "height": 8,
+            "width": 2,
+            "x": 4,
+            "y": 7
+          },
+          "widget": {
+            "name": "b0d9c58434f1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a6fc227b0ed2",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "`customer_state`",
+                      "name": "state"
+                    },
+                    {
+                      "expression": "SUM(`items_value`)",
+                      "name": "total_items"
+                    }
+                  ],
+                  "orders": [
+                    {
+                      "direction": "DESC",
+                      "expression": "`total_items`"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "axis": {
+                    "title": "Item value (BRL)"
+                  },
+                  "displayName": "Item value (BRL)",
+                  "fieldName": "total_items",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "axis": {
+                    "title": "State"
+                  },
+                  "displayName": "State",
+                  "fieldName": "state",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "x-reversed"
+                    }
+                  }
+                }
+              },
+              "format": {
+                "numberFormat": {
+                  "formatType": "numeral",
+                  "format": "0,0"
+                }
+              },
+              "frame": {
+                "showDescription": false,
+                "showTitle": true,
+                "title": "Item value by state"
+              },
+              "mark": {
+                "colors": [
+                  "#0D9488"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "position": {
+            "height": 6,
+            "width": 6,
+            "x": 0,
+            "y": 15
+          },
+          "widget": {
+            "name": "86124b614173",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a6fc227b0ed2",
+                  "disaggregated": false,
+                  "fields": [
+                    {
+                      "expression": "`purchase_month`",
+                      "name": "month"
+                    },
+                    {
+                      "expression": "COUNT(`order_id`)",
+                      "name": "orders"
+                    },
+                    {
+                      "expression": "SUM(`items_value`)",
+                      "name": "items_value"
+                    },
+                    {
+                      "expression": "SUM(`freight_value`)",
+                      "name": "freight_value"
+                    },
+                    {
+                      "expression": "AVG(`items_value`)",
+                      "name": "average_items"
+                    },
+                    {
+                      "expression": "SUM(`sla_evaluable`)",
+                      "name": "sla_orders"
+                    },
+                    {
+                      "expression": "AVG(`on_time_percent_per_order`)",
+                      "name": "on_time_pct"
+                    }
+                  ],
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "`month`"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "displayName": "Month",
+                    "fieldName": "month"
+                  },
+                  {
+                    "displayName": "Orders",
+                    "fieldName": "orders"
+                  },
+                  {
+                    "displayName": "Item value (BRL)",
+                    "fieldName": "items_value"
+                  },
+                  {
+                    "displayName": "Freight (BRL)",
+                    "fieldName": "freight_value"
+                  },
+                  {
+                    "displayName": "Avg. item value/order (BRL)",
+                    "fieldName": "average_items"
+                  },
+                  {
+                    "displayName": "Evaluable deliveries",
+                    "fieldName": "sla_orders"
+                  },
+                  {
+                    "displayName": "On time (%)",
+                    "fieldName": "on_time_pct"
+                  }
+                ]
+              },
+              "frame": {
+                "showDescription": false,
+                "showTitle": true,
+                "title": "Monthly breakdown"
+              }
+            }
+          }
+        },
+        {
+          "position": {
+            "height": 4,
+            "width": 6,
+            "x": 0,
+            "y": 21
+          },
+          "widget": {
+            "name": "30e9d3d69880",
+            "textbox_spec": "### How to read these metrics\n- **Coverage:** delivered orders with items accepted by the project's quality rules. Rejected rows are retained in Bronze and quarantine tables.\n- **On time:** delivery date on or before the promised date; orders without a valid assessment are excluded from the rate denominator.\n- **Period:** purchase month. Historical data from 2016–2018; the first and last months may be partial. Start with the full date range and all states.\n- **Source:** Olist · Brazilian E-Commerce Public Dataset · CC BY-NC-SA 4.0."
+          }
+        }
+      ],
+      "name": "d5fd7355e0bc"
+    }
+  ]
+}

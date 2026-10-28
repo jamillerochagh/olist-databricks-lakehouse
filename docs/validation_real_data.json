@@ -1,0 +1,52 @@
+{
+  "scope": "Apache Spark local; CSVs reais. Persistencia temporaria em Parquet, nao Databricks/Delta.",
+  "spark_version": "4.0.1",
+  "tables": [
+    {
+      "entity": "customers",
+      "source_rows": 99441,
+      "silver_rows": 99441,
+      "rejected_rows": 0,
+      "duplicates_collapsed": 0,
+      "reasons": {}
+    },
+    {
+      "entity": "products",
+      "source_rows": 32951,
+      "silver_rows": 32951,
+      "rejected_rows": 0,
+      "duplicates_collapsed": 0,
+      "reasons": {}
+    },
+    {
+      "entity": "orders",
+      "source_rows": 99441,
+      "silver_rows": 99433,
+      "rejected_rows": 8,
+      "duplicates_collapsed": 0,
+      "reasons": {
+        "delivered_without_delivery_date": 8
+      }
+    },
+    {
+      "entity": "items",
+      "source_rows": 112650,
+      "silver_rows": 112642,
+      "rejected_rows": 8,
+      "duplicates_collapsed": 0,
+      "reasons": {
+        "missing_parent:orders.order_id": 8
+      }
+    },
+    {
+      "entity": "payments",
+      "source_rows": 103886,
+      "silver_rows": 103878,
+      "rejected_rows": 8,
+      "duplicates_collapsed": 0,
+      "reasons": {
+        "missing_parent:orders.order_id": 8
+      }
+    }
+  ]
+}

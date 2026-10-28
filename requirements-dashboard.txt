@@ -1,0 +1,4 @@
+# Local dashboard generation and definition validation only; not required in Databricks.
+databricks-labs-lsql==0.17.0
+databricks-sdk==0.157.0
+sqlglot==26.29.0

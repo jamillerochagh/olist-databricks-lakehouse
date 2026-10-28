@@ -1,0 +1,2 @@
+# Apenas para testar fora do Databricks. Na Free Edition, PySpark e Delta ja existem.
+pyspark==4.0.1

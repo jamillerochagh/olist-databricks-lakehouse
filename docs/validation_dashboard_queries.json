@@ -1,0 +1,63 @@
+{
+  "scope": "Local Spark on original CSVs, curated Silver and Gold. Field predicates applied before widget aggregation. Native Lakeview import, rendering, associativity and UI interactions are not executed locally.",
+  "percentage_fixtures": {
+    "one_on_time_one_late_one_unknown": {
+      "expected_percent": 50.0,
+      "actual_percent": 50.0,
+      "result": "passed"
+    },
+    "one_evaluable_two_unknown": {
+      "expected_percent": 100.0,
+      "actual_percent": 100.0,
+      "result": "passed"
+    },
+    "no_evaluable_deadlines": {
+      "expected_percent": null,
+      "actual_percent": null,
+      "result": "passed"
+    }
+  },
+  "scenarios": {
+    "all": {
+      "orders": 96470,
+      "items_value_brl": "13220248.93",
+      "on_time_orders": 89936,
+      "sla_evaluable_orders": 96470,
+      "on_time_rate": 0.9322690992018243,
+      "on_time_percent": 93.22690992018244,
+      "widget_queries_executed": 8,
+      "charts_and_table_reconciled": true
+    },
+    "df_2018": {
+      "orders": 1193,
+      "items_value_brl": "164284.94",
+      "on_time_orders": 1113,
+      "sla_evaluable_orders": 1193,
+      "on_time_rate": 0.9329421626152556,
+      "on_time_percent": 93.29421626152556,
+      "widget_queries_executed": 8,
+      "charts_and_table_reconciled": true
+    },
+    "df_go_2017": {
+      "orders": 1798,
+      "items_value_brl": "264970.71",
+      "on_time_orders": 1712,
+      "sla_evaluable_orders": 1798,
+      "on_time_rate": 0.9521690767519466,
+      "on_time_percent": 95.21690767519466,
+      "widget_queries_executed": 8,
+      "charts_and_table_reconciled": true
+    },
+    "empty": {
+      "orders": 0,
+      "items_value_brl": "None",
+      "on_time_orders": 0,
+      "sla_evaluable_orders": 0,
+      "on_time_rate": null,
+      "on_time_percent": null,
+      "widget_queries_executed": 8,
+      "charts_and_table_reconciled": true
+    }
+  },
+  "result": "passed"
+}

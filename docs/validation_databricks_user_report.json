@@ -1,0 +1,28 @@
+{
+  "confirmed_on": "2026-10-28",
+  "confirmation_timezone": "America/Sao_Paulo",
+  "evidence_type": "user-reported manual validation in Databricks",
+  "confirmation_scope": "The user confirmed that the preceding checklist for reference totals and date/state filters matched in the English dashboard.",
+  "preceding_checklist": [
+    "Check all dates and states against reference totals.",
+    "Select DF and purchase dates from 2018-01-01 through 2018-12-31; check the cards and chart/table response.",
+    "Clear the filters and check that the original totals return."
+  ],
+  "reference_values": {
+    "all": {
+      "delivered_orders": 96470,
+      "item_value_brl": "13220248.93",
+      "on_time_percent": 93.23
+    },
+    "df_2018": {
+      "delivered_orders": 1193,
+      "item_value_brl": "164284.94",
+      "on_time_percent": 93.29
+    }
+  },
+  "assistant_direct_workspace_access": false,
+  "automated_cloud_test": false,
+  "dashboard_publication_requested": false,
+  "result": "manual checks reported passed",
+  "confirmation_summary": "The project owner reported that the reference totals and filter checklist matched."
+}

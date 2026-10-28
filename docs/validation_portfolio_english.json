@@ -1,0 +1,26 @@
+{
+  "language": "English",
+  "source_notebooks": 7,
+  "standalone_notebooks": 5,
+  "code_cells_checked": 33,
+  "markdown_cells_translated": 36,
+  "transformation_ast_preserved_except_reviewed_presentation_strings": true,
+  "dataset_contracts_and_dashboard_unchanged": true,
+  "notebook_outputs_cleared": true,
+  "markdown_links_valid": true,
+  "checked_notebook_paths": [
+    "notebooks/00_setup.py",
+    "notebooks/01_bronze.py",
+    "notebooks/02_silver.py",
+    "notebooks/03_explorar.py",
+    "notebooks/04_gold.py",
+    "notebooks/_gold.py",
+    "notebooks/_shared.py",
+    "standalone/00_setup.ipynb",
+    "standalone/01_bronze.ipynb",
+    "standalone/02_silver.ipynb",
+    "standalone/03_explorar.ipynb",
+    "standalone/04_gold.ipynb"
+  ],
+  "result": "passed"
+}

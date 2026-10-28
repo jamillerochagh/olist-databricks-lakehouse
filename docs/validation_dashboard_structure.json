@@ -1,0 +1,23 @@
+{
+  "model": "Databricks Labs LSQL 0.17.0",
+  "datasets": 1,
+  "pages": 1,
+  "widgets": 10,
+  "widget_types": [
+    "filter-date-range-picker",
+    "filter-multi-select",
+    "counter",
+    "counter",
+    "counter",
+    "line",
+    "bar",
+    "table"
+  ],
+  "layout_overlap": false,
+  "model_roundtrip": true,
+  "main_query_bindings": true,
+  "simple_visual_aggregations": true,
+  "result": "passed",
+  "regression_wrong_main_name_rejected": true,
+  "regression_compound_visual_measure_rejected": true
+}

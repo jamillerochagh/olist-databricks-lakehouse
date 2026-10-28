@@ -1,0 +1,15 @@
+{
+  "result": "passed",
+  "gold_fixture_cases": [
+    "multiple_items_and_payments",
+    "calendar_day_deadline",
+    "late_delivery",
+    "unknown_and_invalid_deadline",
+    "zero_denominator",
+    "missing_items_vs_zero_value",
+    "missing_payments",
+    "canceled_order_cohort",
+    "inflated_amount_detection"
+  ],
+  "scope": "Targeted Gold edge cases after translating diagnostic messages; prior real-data results retained."
+}

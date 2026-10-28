@@ -1,0 +1,29 @@
+{
+  "scope": "Local Spark 4.0.1; real CSVs curated with project functions. All Gold notebook cells executed with temporary Parquet and views replacing Delta/Unity Catalog. Not a cloud execution test.",
+  "fixture_checks": [
+    "multiple_items_and_payments",
+    "calendar_day_deadline",
+    "late_delivery",
+    "unknown_and_invalid_deadline",
+    "zero_denominator",
+    "missing_items_vs_zero_value",
+    "missing_payments",
+    "canceled_order_cohort",
+    "inflated_amount_detection"
+  ],
+  "overview": {
+    "orders_in_gold": 99433,
+    "eligible_delivered_orders": 96470,
+    "delivered_items_value_brl": "13220248.93",
+    "purchase_months": 23
+  },
+  "validation": {
+    "orders_in_gold": 99433,
+    "eligible_delivered_orders": 96470,
+    "delivered_items_value_brl": "13220248.93",
+    "purchase_month_rows": 23,
+    "customer_state_rows": 27
+  },
+  "repeat_snapshot_same_overview": true,
+  "result": "passed"
+}
