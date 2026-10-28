@@ -1,6 +1,6 @@
 # Olist E-commerce Lakehouse
 
-A Databricks Free Edition project by **Jamille Ghazaleh**, connecting data engineering
+A Databricks project by **Jamille Ghazaleh**, connecting data engineering
 with sales and delivery analytics. The pipeline preserves source records, applies
 explicit quality rules and serves an interactive dashboard in English.
 
